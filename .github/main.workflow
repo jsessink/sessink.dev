@@ -10,8 +10,19 @@ workflow "On Push Deploy to Prod" {
   on = "push"
 }
 
-action "Azure Login" {
+action "Is Master Push Check" {
+  uses = "actions/bin/filter@master"
+  args = "branch master"
+}
+
+action "Is Not PR Merge Check" {
+  uses = "actions/bin/filter@master"
+  args = "merged false"
+}
+
+action "Azure Login For PR" {
   uses = "Azure/github-actions/login@master"
+  needs = ["Is Not PR Merge Check"]
   env = {
     AZURE_SUBSCRIPTION = "Visual Studio Enterprise"
   }
@@ -20,16 +31,11 @@ action "Azure Login" {
 
 action "Azure Login After Master Push" {
   uses = "Azure/github-actions/login@master"
-  needs = ["Master Push"]
+  needs = ["Is Master Push Check"]
   env = {
     AZURE_SUBSCRIPTION = "Visual Studio Enterprise"
   }
   secrets = ["AZURE_SERVICE_APP_ID", "AZURE_SERVICE_PASSWORD", "AZURE_SERVICE_TENANT"]
-}
-
-action "Master Push" {
-  uses = "actions/bin/filter@master"
-  args = "branch master"
 }
 
 action "Deploy to Azure Web App" {
