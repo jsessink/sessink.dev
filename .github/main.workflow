@@ -3,14 +3,12 @@ workflow "New workflow" {
   resolves = ["Deploy to Azure Web App"]
 }
 
-action "Deploy to Azure" {
-  uses = "./.github/actions/azure-deploy"
-  secrets = ["SERVICE_PASS"]
+action "Azure Login" {
+  uses = "Azure/github-actions/login@master"
   env = {
-    SERVICE_PRINCIPAL="sessink",
-    TENANT_ID="3aef123d-bef5-4103-b48b-87c38cf24cd0",
-    APPID="3aef123d-bef5-4103-b48b-87c38cf24cd0"
+    AZURE_SUBSCRIPTION = "Visual Studio Enterprise"
   }
+  secrets = ["AZURE_SERVICE_APP_ID", "AZURE_SERVICE_PASSWORD", "AZURE_SERVICE_TENANT"]
 }
 
 action "Deploy to Azure Web App" {
