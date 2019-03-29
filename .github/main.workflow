@@ -1,6 +1,6 @@
 workflow "New workflow" {
   on = "push"
-  resolves = ["azure"]
+  resolves = ["Deploy to Azure"]
 }
 
 action "Deploy to Azure" {
