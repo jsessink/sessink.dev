@@ -4,8 +4,11 @@ workflow "On PR Push to Staging" {
 }
 
 workflow "On Push Deploy to Prod" {
+  resolves = [
+    "Master Push",
+    "Deploy to Azure Web App"
+  ]
   on = "push"
-  resolves = ["Deploy to Azure Web App"]
 }
 
 action "Azure Login" {
@@ -14,6 +17,11 @@ action "Azure Login" {
     AZURE_SUBSCRIPTION = "Visual Studio Enterprise"
   }
   secrets = ["AZURE_SERVICE_APP_ID", "AZURE_SERVICE_PASSWORD", "AZURE_SERVICE_TENANT"]
+}
+
+action "Master Push" {
+  uses = "actions/bin/filter@master"
+  args = "branch master"
 }
 
 action "Deploy to Azure Web App" {
