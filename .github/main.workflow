@@ -5,7 +5,7 @@ workflow "On PR Push to Staging" {
 
 workflow "On Push Deploy to Prod" {
   resolves = [
-    "Master Push"
+    "Deploy to Azure Web App"
   ]
   on = "push"
 }
