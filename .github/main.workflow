@@ -6,7 +6,7 @@ workflow "New workflow" {
 action "Azure Login" {
   uses = "Azure/github-actions/login@master"
   env = {
-    AZURE_SUBSCRIPTION = "Visual Studio Enterprise"
+    AZURE_SUBSCRIPTION = "ab3b5eeb-7bcb-4231-b129-97db93cda44f"
   }
   secrets = ["AZURE_SERVICE_APP_ID", "AZURE_SERVICE_PASSWORD", "AZURE_SERVICE_TENANT"]
 }
