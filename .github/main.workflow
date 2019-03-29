@@ -20,15 +20,12 @@ action "Azure Login" {
 
 action "Master Push" {
   uses = "actions/bin/filter@master"
-  args = "branch master",
-  resolves = [
-    "Deploy to Azure Web App"
-  ]
+  args = "branch master"
 }
 
 action "Deploy to Azure Web App" {
   uses = "Azure/github-actions/webapp@master"
-  needs = ["Azure Login"]
+  needs = ["Master Push", "Azure Login"]
   env = {
     AZURE_APP_NAME = "Sessink"
     AZURE_APP_PACKAGE_LOCATION = "./"
