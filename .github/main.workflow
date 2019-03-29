@@ -5,8 +5,7 @@ workflow "On PR Push to Staging" {
 
 workflow "On Push Deploy to Prod" {
   resolves = [
-    "Master Push",
-    "Deploy to Azure Web App"
+    "Master Push"
   ]
   on = "push"
 }
@@ -21,7 +20,10 @@ action "Azure Login" {
 
 action "Master Push" {
   uses = "actions/bin/filter@master"
-  args = "branch master"
+  args = "branch master",
+  resolves = [
+    "Deploy to Azure Web App"
+  ]
 }
 
 action "Deploy to Azure Web App" {
