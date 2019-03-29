@@ -12,7 +12,15 @@ workflow "On Push Deploy to Prod" {
 
 action "Azure Login" {
   uses = "Azure/github-actions/login@master"
-  needs = ["Master Push"],
+  env = {
+    AZURE_SUBSCRIPTION = "Visual Studio Enterprise"
+  }
+  secrets = ["AZURE_SERVICE_APP_ID", "AZURE_SERVICE_PASSWORD", "AZURE_SERVICE_TENANT"]
+}
+
+action "Azure Login After Master Push" {
+  uses = "Azure/github-actions/login@master"
+  needs = ["Master Push"]
   env = {
     AZURE_SUBSCRIPTION = "Visual Studio Enterprise"
   }
@@ -26,7 +34,7 @@ action "Master Push" {
 
 action "Deploy to Azure Web App" {
   uses = "Azure/github-actions/webapp@master"
-  needs = ["Azure Login"]
+  needs = ["Azure Login After Master Push"]
   env = {
     AZURE_APP_NAME = "Sessink"
     AZURE_APP_PACKAGE_LOCATION = "./"
