@@ -49,7 +49,7 @@ action "Deploy to Azure Web App" {
 
 action "Deploy to Azure Web App Staging" {
   uses = "Azure/github-actions/webapp@master"
-  needs = ["Azure Login"]
+  needs = ["Azure Login For PR"]
   env = {
     AZURE_APP_NAME = "SessinkStaging"
     AZURE_APP_PACKAGE_LOCATION = "./"
