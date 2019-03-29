@@ -3,7 +3,12 @@ workflow "New workflow" {
   resolves = ["azure"]
 }
 
-action "azure" {
-  uses = "docker://alpine/git:latest"
-  runs = "entrypoint.sh"
+action "Deploy to Azure" {
+  uses = "./.github/actions/azure-deploy"
+  secrets = ["SERVICE_PASS"]
+  env = {
+    SERVICE_PRINCIPAL="sessink",
+    TENANT_ID="3aef123d-bef5-4103-b48b-87c38cf24cd0",
+    APPID="3aef123d-bef5-4103-b48b-87c38cf24cd0"
+  }
 }
