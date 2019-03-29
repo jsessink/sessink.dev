@@ -17,7 +17,7 @@ action "Is Master Push Check" {
 
 action "Is Not PR Merge Check" {
   uses = "actions/bin/filter@master"
-  args = "merged false"
+  args = "merged synchronize"
 }
 
 action "Azure Login For PR" {
