@@ -43,7 +43,7 @@ action "Deploy to Azure Web App" {
   needs = ["Azure Login After Master Push"]
   env = {
     AZURE_APP_NAME = "Sessink"
-    AZURE_APP_PACKAGE_LOCATION = "./"
+    AZURE_APP_PACKAGE_LOCATION = "./src/"
   }
 }
 
@@ -52,6 +52,6 @@ action "Deploy to Azure Web App Staging" {
   needs = ["Azure Login For PR"]
   env = {
     AZURE_APP_NAME = "SessinkStaging"
-    AZURE_APP_PACKAGE_LOCATION = "./"
+    AZURE_APP_PACKAGE_LOCATION = "./src/"
   }
 }
