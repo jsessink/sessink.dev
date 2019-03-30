@@ -1,0 +1,11 @@
+{
+	"name"        : "sessink-dev",
+	"description" : "Sessink.Dev site",
+	"version"     : "0.0.1",
+	"private"     : true,
+	"license"     : "MIT",
+	"author"      : "Josh Sessink",
+	"scripts"     : {
+		"start" : "node index.js"
+	}
+}
